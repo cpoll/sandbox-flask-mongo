@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from flask import Flask
-from server.routes.fizzbuzz.fizzbuzz_route import FIZZBUZZ_BLUEPRINT
+from server.routes import FIZZBUZZ_BLUEPRINT
 
 APP = Flask(__name__)
 

@@ -14,7 +14,7 @@ def test_fizzbuzz_zero_returns_empty_list():
     assert get_fizzbuzz_range(0) == []
 
 def test_fizzbuzz_negative_returns_empty_list():
-    assert get_fizzbuzz_range(-1) == [1]
+    assert get_fizzbuzz_range(-1) == []
 
 def test_fizzbuzz_string_returns_empty_list():
     assert get_fizzbuzz_range("hello") == []

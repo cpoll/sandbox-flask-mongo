@@ -6,7 +6,7 @@ def get_fizzbuzz_range(number):
     or empty array if the number is invalid
     """
 
-    if number < 1 or number > __MAX_ALLOWED_FIZZBUZZ_NUMBER:
+    if not isinstance(number, int) or number < 1 or number > __MAX_ALLOWED_FIZZBUZZ_NUMBER:
         return []
 
     return list(map(get_fizzbuzz_value, range(1, number+1)))

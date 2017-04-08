@@ -1,0 +1,18 @@
+machine:
+
+  timezone:
+    America/Toronto # Set the timezone
+
+  environment:
+    CIRCLE_ENV: test
+
+  python:
+    version: 3.5.2
+
+dependencies:
+  post:
+    - pip install -U -r test-requirements.txt
+
+test:
+  override:
+    - ./test.sh

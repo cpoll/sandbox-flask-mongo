@@ -9,7 +9,7 @@ def get_fizzbuzz_range(number):
     if number < 1 or number > __MAX_ALLOWED_FIZZBUZZ_NUMBER:
         return []
 
-    return map(get_fizzbuzz_value, range(1, number))
+    return list(map(get_fizzbuzz_value, range(1, number+1)))
 
 def get_fizzbuzz_value(number):
     if number % 15 == 0:

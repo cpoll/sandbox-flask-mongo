@@ -1,0 +1,20 @@
+machine:
+
+  timezone:
+    America/Toronto # Set the timezone
+
+  environment:
+    CIRCLE_ENV: test
+
+dependencies:
+
+test:
+  override:
+    - test.sh
+
+
+## Custom notifications
+notify:
+  webhooks:
+    # A list of hashes representing hooks. Only the url field is supported.
+    - url: https://someurl.com/hooks/circle

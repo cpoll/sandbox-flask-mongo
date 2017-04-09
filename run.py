@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from server import APP
 
 if __name__ == "__main__":

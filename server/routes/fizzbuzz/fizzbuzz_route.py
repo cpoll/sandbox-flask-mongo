@@ -1,9 +1,12 @@
 import json
 from flask import Blueprint, jsonify
 from server.helpers.fizzbuzz_helper import get_fizzbuzz_range
-from server.access_api.fizzbuzz_cache import Fizzbuzz_Cache
+from server.access_api.fizzbuzzcache import FizzbuzzCache
+
 
 FIZZBUZZ_BLUEPRINT = Blueprint('fizzbuzz', __name__)
+
+
 @FIZZBUZZ_BLUEPRINT.route('/fizzbuzz/<number>')
 def fizzbuzz_route(number):
     try:
@@ -13,7 +16,7 @@ def fizzbuzz_route(number):
         response.status_code = 400
         return response
 
-    fizzbuzz_cache = Fizzbuzz_Cache()
+    fizzbuzz_cache = FizzbuzzCache()
     fizzbuzz_value = fizzbuzz_cache.get_fizzbuzz_value(number)
 
     if not fizzbuzz_value:

@@ -6,7 +6,8 @@
 
 from pymongo import MongoClient
 
-class Fizzbuzz_Cache:
+
+class FizzbuzzCache:
     def __init__(self):
         mongo_client = MongoClient('mongodb://localhost:27017/')
         db = mongo_client.test_database

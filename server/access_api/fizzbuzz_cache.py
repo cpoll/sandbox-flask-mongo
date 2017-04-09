@@ -10,10 +10,10 @@ class Fizzbuzz_Cache:
     def __init__(self):
         mongo_client = MongoClient('mongodb://localhost:27017/')
         db = mongo_client.test_database
-        self.fizzbuzz_collection = db.fizzbuzz_collection
+        self.cache = db.fizzbuzz_cache
 
     def get_fizzbuzz_value(self, number):
-        fizzbuzz_entry = self.fizzbuzz_collection.find_one({"number": number})
+        fizzbuzz_entry = self.cache.find_one({"number": number})
         if fizzbuzz_entry and fizzbuzz_entry["fizzbuzz_result"]:
             return fizzbuzz_entry["fizzbuzz_result"]
         else:
@@ -24,5 +24,5 @@ class Fizzbuzz_Cache:
             "number": number,
             "fizzbuzz_result": fizzbuzz_result
         }
-        cache_id = self.fizzbuzz_collection.insert_one(fizzbuzz_entry)
+        cache_id = self.cache.insert_one(fizzbuzz_entry)
         return cache_id

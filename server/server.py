@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
-from flask import Flask
-from server.routes import FIZZBUZZ_BLUEPRINT
-
-APP = Flask(__name__)
+from server import APP
+from server.routes.fizzbuzz.fizzbuzz_route import FIZZBUZZ_BLUEPRINT
 
 @APP.route("/")
 def hello():

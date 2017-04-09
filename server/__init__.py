@@ -1,1 +1,3 @@
-from .server import APP
+from flask import Flask
+
+APP = Flask(__name__)

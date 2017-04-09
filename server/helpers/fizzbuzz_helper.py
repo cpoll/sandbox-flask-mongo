@@ -1,5 +1,6 @@
 __MAX_ALLOWED_FIZZBUZZ_NUMBER = 100000
 
+
 def get_fizzbuzz_range(number):
     """
     Get an array of fizzbuzz values from 1 to number (inclusive)
@@ -10,6 +11,7 @@ def get_fizzbuzz_range(number):
         return []
 
     return list(map(get_fizzbuzz_value, range(1, number+1)))
+
 
 def get_fizzbuzz_value(number):
     if number % 15 == 0:

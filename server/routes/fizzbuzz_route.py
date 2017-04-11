@@ -2,12 +2,14 @@ import json
 from flask import Blueprint, jsonify
 from server.helpers.fizzbuzz_helper import get_fizzbuzz_range
 from server.access_api.fizzbuzzcache import FizzbuzzCache
+from .require_authentication import require_authentication
 
 
 FIZZBUZZ_BLUEPRINT = Blueprint('fizzbuzz', __name__)
 
 
 @FIZZBUZZ_BLUEPRINT.route('/fizzbuzz/<number>', methods=["GET"])
+@require_authentication("user")
 def fizzbuzz_route(number):
     try:
         number = int(number)

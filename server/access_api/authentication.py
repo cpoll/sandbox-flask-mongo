@@ -4,7 +4,7 @@
 
 from pymongo import MongoClient
 from datetime import datetime, timedelta
-from random import random
+import random
 
 class Authentication:
 

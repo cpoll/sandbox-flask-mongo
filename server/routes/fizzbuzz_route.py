@@ -7,7 +7,7 @@ from server.access_api.fizzbuzzcache import FizzbuzzCache
 FIZZBUZZ_BLUEPRINT = Blueprint('fizzbuzz', __name__)
 
 
-@FIZZBUZZ_BLUEPRINT.route('/fizzbuzz/<number>')
+@FIZZBUZZ_BLUEPRINT.route('/fizzbuzz/<number>', methods=["GET"])
 def fizzbuzz_route(number):
     try:
         number = int(number)

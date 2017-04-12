@@ -15,7 +15,7 @@ class FizzbuzzCache:
 
     def get_fizzbuzz_value(self, number):
         fizzbuzz_entry = self.cache.find_one({"number": number})
-        if fizzbuzz_entry and fizzbuzz_entry["fizzbuzz_result"]:
+        if fizzbuzz_entry and "fizzbuzz_result" in fizzbuzz_entry:
             return fizzbuzz_entry["fizzbuzz_result"]
         else:
             return False

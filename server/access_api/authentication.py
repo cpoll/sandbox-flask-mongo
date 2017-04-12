@@ -4,6 +4,7 @@
 
 from pymongo import MongoClient
 from datetime import datetime, timedelta
+from .accounts import Accounts
 import random
 
 class Authentication:
@@ -16,12 +17,14 @@ class Authentication:
         db = mongo_client.test_database
         self.sessions = db.sessions
 
+        self.accounts = Accounts()
+
 
     """
         Given valid username/password pair, returns auth token. Else returns False
     """
     def authenticate(self, username, password):
-        if username == password:
+        if self.accounts.verify_user(username, password):
             token = self.__create_token()
 
             session_entry = {

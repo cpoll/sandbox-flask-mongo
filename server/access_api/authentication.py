@@ -2,7 +2,7 @@
     Methods used for user login and token auth.
 """
 
-from pymongo import MongoClient
+from .connectionwrapper import ConnectionWrapper
 from datetime import datetime, timedelta
 from .accounts import Accounts
 import random
@@ -13,10 +13,7 @@ class Authentication:
     __VALID_TOKEN_CHARACTERS = "abcdefghijklmnopqrstuvwxyz1234567890"
 
     def __init__(self):
-        mongo_client = MongoClient('mongodb://localhost:27017/')
-        db = mongo_client.test_database
-        self.sessions = db.sessions
-
+        self.sessions = ConnectionWrapper().db.sessions
         self.accounts = Accounts()
 
 

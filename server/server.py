@@ -3,6 +3,7 @@ from flask import Flask
 
 from .routes.fizzbuzz_route import FIZZBUZZ_BLUEPRINT
 from .routes.login_route import LOGIN_BLUEPRINT
+from .routes.register_route import REGISTER_BLUEPRINT
 
 APP = Flask(__name__)
 
@@ -13,3 +14,4 @@ def hello():
 
 APP.register_blueprint(FIZZBUZZ_BLUEPRINT)
 APP.register_blueprint(LOGIN_BLUEPRINT)
+APP.register_blueprint(REGISTER_BLUEPRINT)

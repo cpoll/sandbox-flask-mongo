@@ -8,8 +8,8 @@ from .connectionwrapper import ConnectionWrapper
 
 
 class FizzbuzzCache:
-    def __init__(self, conection_wrapper=ConnectionWrapper()):
-        self.cache = conection_wrapper.db.fizzbuzz_cache
+    def __init__(self):
+        self.cache = ConnectionWrapper().get_collection('fizzbuzz_cache')
 
     def get_fizzbuzz_value(self, number):
         fizzbuzz_entry = self.cache.find_one({"number": number})

@@ -16,4 +16,7 @@ class ConnectionWrapper:
         assert mongo_db_key in os.environ
 
         mongo_client = MongoClient(os.environ[mongo_client_key])
-        self.db = mongo_client[os.environ[mongo_db_key]]
+        self.__db = mongo_client[os.environ[mongo_db_key]]
+
+    def get_collection(self, collection):
+        return self.__db[collection]

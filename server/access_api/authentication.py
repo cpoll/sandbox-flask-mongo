@@ -13,7 +13,7 @@ class Authentication:
     __VALID_TOKEN_CHARACTERS = "abcdefghijklmnopqrstuvwxyz1234567890"
 
     def __init__(self):
-        self.sessions = ConnectionWrapper().db.sessions
+        self.sessions = ConnectionWrapper().get_collection('sessions')
         self.accounts = Accounts()
 
 

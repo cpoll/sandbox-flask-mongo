@@ -9,7 +9,7 @@ import bcrypt
 class Accounts:
 
     def __init__(self):
-        self.accounts = ConnectionWrapper().db.accounts
+        self.accounts = ConnectionWrapper().get_collection('accounts')
 
 
     """

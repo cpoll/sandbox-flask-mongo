@@ -1,2 +1,2 @@
 echo "Begin tests"
-pytest . -v
+pytest ./server -v

@@ -4,14 +4,12 @@
     *obviously not actually true or a good idea.
 """
 
-from pymongo import MongoClient
+from .connectionwrapper import ConnectionWrapper
 
 
 class FizzbuzzCache:
     def __init__(self):
-        mongo_client = MongoClient('mongodb://localhost:27017/')
-        db = mongo_client.test_database
-        self.cache = db.fizzbuzz_cache
+        self.cache = ConnectionWrapper().db.fizzbuzz_cache
 
     def get_fizzbuzz_value(self, number):
         fizzbuzz_entry = self.cache.find_one({"number": number})

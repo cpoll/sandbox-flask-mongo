@@ -2,16 +2,14 @@
     Methods used for user registration / login.
 """
 
-from pymongo import MongoClient
+from .connectionwrapper import ConnectionWrapper
 import bcrypt
 
 
 class Accounts:
 
     def __init__(self):
-        mongo_client = MongoClient('mongodb://localhost:27017/')
-        db = mongo_client.test_database
-        self.accounts = db.accounts
+        self.accounts = ConnectionWrapper().db.accounts
 
 
     """

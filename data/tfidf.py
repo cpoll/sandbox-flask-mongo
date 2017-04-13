@@ -1,6 +1,7 @@
 from os import listdir
 from os.path import isfile, join
 import math
+from scipy import spatial
 
 
 def split_string_into_terms(string):
@@ -82,12 +83,55 @@ def create_tfidf_dict(string, idf_dict):
 """
 def get_tfidf_delta(one, two):
 
-    return 4
+    all_words = list(one.keys()) + list(two.keys())
+
+    a1 = []
+    a2 = []
+    #Create two ordered arrays of values, where a1[i] and a2[i] are the value of the same word
+    for word in all_words:
+        if word in one:
+            a1.append(one[word])
+        else:
+            a1.append(0)
+
+        if word in two:
+            a2.append(two[word])
+        else:
+            a2.append(0)
+
+    result = 1 - spatial.distance.cosine(a1, a2)
+    return result
+
+
+def get_key_with_value(dict, value):
+    for key in dict:
+        if dict[key] == value:
+            return key
+
+def search_for_files(search_term, idf_dict):
+    # Compile results
+    search_results = {}
+    for file in file_tfidfs:
+        value = get_tfidf_delta(search_term_tfidf, file_tfidfs[file])
+        search_results[file] = value
+
+    # Get the top 10 from the search results
+    top_scores = list(reversed(sorted(list(search_results.values()))))
+    top_results = {}
+    for score in top_scores[:10]:
+        name = get_key_with_value(search_results, score)
+        top_results[name] = score
+
+    print(top_results)
 
 if __name__ == "__main__":
-    file_contents = load_all_files("./review_polarity/txt_sentoken/pos")
+    file_contents = load_all_files("./review_polarity/txt_sentoken/min")
 
-    idf_dict = calculate_idf( file_contents.values() )
+    #file_contents_pos = load_all_files("./review_polarity/txt_sentoken/pos")
+    #file_contents_neg = load_all_files("./review_polarity/txt_sentoken/neg")
+    #file_contents = {**file_contents_pos, **file_contents_neg}
+
+    idf_dict = calculate_idf(file_contents.values())
 
     # Calculate tfidf for every file
     file_tfidfs = {}
@@ -96,8 +140,8 @@ if __name__ == "__main__":
 
 
     # Calculate tfidf for search term
-    search_term = "dress designer wedding"
-    search_term_tfidf = create_tfidf_dict(split_string_into_terms(search_term))
+    search_term = "tony flashback"
+    search_term_tfidf = create_tfidf_dict(search_term, idf_dict)
 
     # Compile results
     search_results = {}
@@ -105,8 +149,12 @@ if __name__ == "__main__":
         value = get_tfidf_delta(search_term_tfidf, file_tfidfs[file])
         search_results[file] = value
 
-
     # Get the top 10 from the search results
+    top_scores = list(reversed(sorted(list(search_results.values()))))
+    top_results = {}
+    for score in top_scores[:10]:
+        name = get_key_with_value(search_results, score)
+        top_results[name] = score
 
-
+    print(top_results)
     print("done")

@@ -109,6 +109,14 @@ def get_key_with_value(dict, value):
             return key
 
 def search_for_files(search_term, idf_dict):
+
+    # Calculate tfidf for search term
+
+
+    search_term_tfidf = create_tfidf_dict(search_term, idf_dict)
+
+
+
     # Compile results
     search_results = {}
     for file in file_tfidfs:
@@ -122,14 +130,14 @@ def search_for_files(search_term, idf_dict):
         name = get_key_with_value(search_results, score)
         top_results[name] = score
 
-    print(top_results)
+    return top_results
 
 if __name__ == "__main__":
-    file_contents = load_all_files("./review_polarity/txt_sentoken/min")
+    #file_contents = load_all_files("./review_polarity/txt_sentoken/min")
 
-    #file_contents_pos = load_all_files("./review_polarity/txt_sentoken/pos")
-    #file_contents_neg = load_all_files("./review_polarity/txt_sentoken/neg")
-    #file_contents = {**file_contents_pos, **file_contents_neg}
+    file_contents_pos = load_all_files("./review_polarity/txt_sentoken/pos")
+    file_contents_neg = load_all_files("./review_polarity/txt_sentoken/neg")
+    file_contents = {**file_contents_pos, **file_contents_neg}
 
     idf_dict = calculate_idf(file_contents.values())
 
@@ -138,23 +146,5 @@ if __name__ == "__main__":
     for file in file_contents:
         file_tfidfs[file] = create_tfidf_dict(file_contents[file], idf_dict)
 
-
-    # Calculate tfidf for search term
-    search_term = "tony flashback"
-    search_term_tfidf = create_tfidf_dict(search_term, idf_dict)
-
-    # Compile results
-    search_results = {}
-    for file in file_tfidfs:
-        value = get_tfidf_delta(search_term_tfidf, file_tfidfs[file])
-        search_results[file] = value
-
-    # Get the top 10 from the search results
-    top_scores = list(reversed(sorted(list(search_results.values()))))
-    top_results = {}
-    for score in top_scores[:10]:
-        name = get_key_with_value(search_results, score)
-        top_results[name] = score
-
-    print(top_results)
+    print(search_for_files("batman superman", idf_dict))
     print("done")
